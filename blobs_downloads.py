@@ -19,15 +19,13 @@ class BlobsProcessing:
                 download_file.write(blob_client.download_blob().readall())
 
     def download_particular_blob(self):
-        blob_name = input("Enter blob(file) name for download with full path. Example - test/test.txt\n\t")
-        for blob in self.all_blobs:
-            file_path = os.path.join(self.folder, blob.name)
-            if blob.name == blob_name:
-                print("\t" + blob.name)
-                blob_client = self.blob_service_client.get_blob_client(container=self.container_name, blob=blob)
-                os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                with open(os.path.join(file_path), "wb") as download_file:
-                    download_file.write(blob_client.download_blob().readall())
+        def download_particular_blob(self):
+            blob_name = input("Enter blob(file) name for download with full path. Example - test/test.txt\n\t")
+            file_path = os.path.join(self.folder, blob_name)
+            blob_client = self.blob_service_client.get_blob_client(container=self.container_name, blob=blob_name)
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
+            with open(os.path.join(file_path), "wb") as download_file:
+                download_file.write(blob_client.download_blob().readall())
 
 
 x = BlobsProcessing()
